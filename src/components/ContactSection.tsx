@@ -1,4 +1,26 @@
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/president@nextgentechcare.com";
+
 export const ContactSection = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const form = e.currentTarget;
+    const nameInput = form.querySelector<HTMLInputElement>('input[name="name"]');
+    const subjectInput = form.querySelector<HTMLInputElement>('input[name="_subject"]');
+    const nextInput = form.querySelector<HTMLInputElement>('input[name="_next"]');
+    if (subjectInput && nameInput) {
+      const name = nameInput.value.trim() || "Unknown";
+      subjectInput.value = `New Enquiry : ${name}`;
+    }
+    if (nextInput) {
+      nextInput.value = `${window.location.origin}${window.location.pathname}#contact?submitted=1`;
+    }
+    // Form submits to FormSubmit.co; no preventDefault()
+  };
+
+  const isSubmitted =
+    typeof window !== "undefined" &&
+    window.location.hash.startsWith("#contact") &&
+    new URLSearchParams(window.location.hash.split("?")[1] || "").get("submitted") === "1";
+
   return (
     <section id="contact" className="section section-accent" aria-labelledby="contact-heading">
       <div className="container contact-layout">
@@ -24,13 +46,19 @@ export const ContactSection = () => {
         </div>
         <form
           className="contact-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const form = e.currentTarget as HTMLFormElement;
-            form.reset();
-            alert("Thank you! We&apos;ll be in touch soon."); // simple, static behavior
-          }}
+          action={FORMSUBMIT_ENDPOINT}
+          method="POST"
+          onSubmit={handleSubmit}
         >
+          <input type="hidden" name="_subject" value="" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="" />
+          {isSubmitted && (
+            <p className="form-success" role="status">
+              Thank you! We&apos;ll be in touch soon.
+            </p>
+          )}
           <div className="form-field">
             <label htmlFor="name">Your name</label>
             <input id="name" name="name" type="text" required />

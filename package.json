@@ -1,12 +1,15 @@
 {
   "name": "nextgentechcare-website",
+  "homepage": "https://nextgentechcare.com/",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -21,6 +24,7 @@
     "eslint": "^9.11.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
+    "gh-pages": "^6.3.0",
     "typescript": "^5.6.0",
     "vite": "^6.0.0"
   }
