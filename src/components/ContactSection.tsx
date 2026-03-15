@@ -1,4 +1,4 @@
-const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/president@nextgentechcare.com";
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/info@nextgentechcare.com";
 
 export const ContactSection = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +36,7 @@ export const ContactSection = () => {
           <div className="contact-details">
             <div>
               <div className="contact-label">Email</div>
-              <a href="mailto:president@nextgentechcare.com">president@nextgentechcare.com</a>
+              <a href="mailto:info@nextgentechcare.com">info@nextgentechcare.com</a>
             </div>
             <div>
               <div className="contact-label">Phone</div>
